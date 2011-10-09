@@ -10,5 +10,5 @@ simplejson==2.2.1
 sorl-thumbnail==11.09
 wsgiref==0.1.2
 
-django-memcached
+python-memcached
 ipython
