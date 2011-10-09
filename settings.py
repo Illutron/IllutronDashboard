@@ -23,8 +23,8 @@ if DEVELOPMENT_MODE:
     STATIC_URL = '/static/'
 else:
     DEBUG = False
-    MEDIA_URL = 'http://media.illutronlog.johan.cc/'
-    STATIC_URL = 'http://static.illutronlog.johan.cc/'
+    MEDIA_URL = 'http://media.illutrondashboard.johan.cc/'
+    STATIC_URL = 'http://static.illutrondashboard.johan.cc/'
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
     CACHES = {
         'default': {

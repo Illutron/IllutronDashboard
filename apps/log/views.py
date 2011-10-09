@@ -15,23 +15,31 @@ def latest(request):
     data = []
 
     for user in users:
-        entry = user.log_entries.all()[0]
-        latest_checkin_entry = user.log_entries.filter(on_illutron=True)[0]
+        try:
+            entry = user.log_entries.all()[0]
 
-        if user.first_name and user.last_name:
-            name = user.first_name + user.last_name
-        else:
-            name = user.username
+            try:
+                latest_checkin_entry = user.log_entries.filter(on_illutron=True)[0].time.isoformat()
+            except:
+                latest_checkin_entry = False
 
-        data.append({
-            'member': name,
-            'on_illutron': entry.on_illutron,
-            'latest_checkin_time': latest_checkin_entry.time.isoformat(),
-            #'last_log_entry': entry.time.isoformat(),
-            #'latitude': entry.latitude,
-            #'longitude': entry.longitude,
+            if user.first_name and user.last_name:
+                name = user.first_name + " " + user.last_name
+            else:
+                name = user.username
 
-        })
+            data.append({
+                'member': name,
+                'on_illutron': entry.on_illutron,
+                'latest_checkin_time': latest_checkin_entry,
+                #'last_log_entry': entry.time.isoformat(),
+                #'latitude': entry.latitude,
+                #'longitude': entry.longitude,
+            })
+
+        except:
+            pass
+
 
     return HttpResponse(simplejson.dumps(data))
     
