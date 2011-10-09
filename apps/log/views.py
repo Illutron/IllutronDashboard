@@ -1,5 +1,6 @@
 from pprint import pprint
 from django.core import serializers
+from django.shortcuts import get_object_or_404
 from django.utils import simplejson
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -7,12 +8,13 @@ from django.contrib.auth.models import User
 
 def member(request, id):
 
-    user = User.objects.get(id=id)
+    user = get_object_or_404(User, id=id)
 
+    log_entries = user.log_entries.all()[:10]
     try:
-        log_entries = user.log_entries.all()[:10]
+        log_entries[0]
     except:
-        return HttpResponse("No activity yet.")
+        return HttpResponse("No activity yet")
 
     if user.first_name and user.last_name:
         name = user.first_name + " " + user.last_name
@@ -21,13 +23,13 @@ def member(request, id):
 
     try:
         latest_checkin_entry = user.log_entries.filter(on_illutron=True)[0].time.isoformat()
-    except:
+    except IndexError:
         latest_checkin_entry = None
 
     try:
         image = user.get_profile().image.url
     except:
-        image = False
+        image = None
 
     log_list = []
     for log in log_entries:
@@ -54,5 +56,5 @@ def member_list(request):
     Return a list of all members.
     """
 
-    data = simplejson.dumps(list(User.objects.all().values('id', 'username', 'first_name', 'last_name')))
+    data = simplejson.dumps(list(User.objects.all().values('id', 'username',)))
     return HttpResponse(data, mimetype='application/json')
