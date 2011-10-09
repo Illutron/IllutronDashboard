@@ -1,2 +1,6 @@
-/html/.sass-cache/
+/static/.sass-cache/
 .DS_Store
+.idea
+*pyc
+*~
+settings_local.py
