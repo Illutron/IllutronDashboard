@@ -78,6 +78,8 @@ INSTALLED_APPS = (
     # Apps
     'log',
     'sync',
+    'profiles',
+    
     #'import',
 
     # Third-party
@@ -99,6 +101,8 @@ DATE_FORMAT = "j N Y"
 TIME_FORMAT = "H:i"
 DATETIME_FORMAT = "j N Y H:i"
 PAGINATE_BY = 12
+
+AUTH_PROFILE_MODULE = "profiles.Profile"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

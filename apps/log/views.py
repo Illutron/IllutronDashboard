@@ -28,10 +28,16 @@ def latest(request):
             else:
                 name = user.username
 
+            try:
+                image = user.get_profile().image.url
+            except:
+                image = False
+
             data.append({
                 'member': name,
                 'on_illutron': entry.on_illutron,
                 'latest_checkin_time': latest_checkin_entry,
+                'image': image
                 #'last_log_entry': entry.time.isoformat(),
                 #'latitude': entry.latitude,
                 #'longitude': entry.longitude,
@@ -41,5 +47,5 @@ def latest(request):
             pass
 
 
-    return HttpResponse(simplejson.dumps(data))
+    return HttpResponse(simplejson.dumps(data), mimetype='application/json')
     
