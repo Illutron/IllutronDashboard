@@ -1,0 +1,52 @@
+@import "compass/reset"
+@import "compass/css3"
+@import "compass/utilities/general/clearfix"
+
+$text-color: #e4e4e4
+$active-color: darken(green, 8)
+$image-size: 80px
+
+body
+	@include background(url("../images/bg.jpg"))
+	font:
+		family: Helvetica
+	color: $text-color
+	padding: 20px
+	
+.mainarea
+
+.personbox
+	@include border-radius(6px)
+	width: 300px
+	height: $image-size
+	background: rgba(black, 0.4)
+	margin-bottom: 10px
+	margin-right: 20px
+	float: left
+	
+	+box-shadow(black 0px 0px 10px)
+
+	
+	img
+		width: $image-size
+		float: left
+		padding-right: 8px
+		@include border-left-radius(6px)
+
+.personbox:hover
+	background: rgba(black, 0.5)
+		
+
+.activeperson
+	background: rgba($active-color, 0.4)
+	+box-shadow(darken($active-color, 25) 0px 0px 10px)
+		
+.activeperson:hover
+	background: rgba($active-color, 0.5)
+	
+	
+.person-name
+	margin-top: 5px
+	font:
+		size: 15px
+		weight: bold
