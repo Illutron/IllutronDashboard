@@ -2,10 +2,10 @@ import os
 import sys
 import site
 
-site.addsitedir('/home/johan/.virtualenvs/IllutronDashboard/lib/python2.7/site-packages')
+site.addsitedir('/home/illutron/.virtualenvs/IllutronDashboard/lib/python2.7/site-packages')
 
-sys.path.append('/home/johan/srv/')
-sys.path.append('/home/johan/srv/IllutronDashboard/')
+sys.path.append('/home/illutron/srv/')
+sys.path.append('/home/illutron/srv/IllutronDashboard/')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'IllutronDashboard.settings'
 
