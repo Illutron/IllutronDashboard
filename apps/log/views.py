@@ -34,8 +34,8 @@ def member(request, id):
     log_list = []
     for log in log_entries:
        log_list.append({
-           'latitude': log.latitude,
-           'longitude': log.longitude,
+           #'latitude': log.latitude,
+           #'longitude': log.longitude,
            'on_illutron': log.on_illutron,
            'time': log.time.isoformat(),
            'description': log.description
