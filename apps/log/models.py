@@ -22,5 +22,5 @@ class Entry(models.Model):
         s = ""
         if not self.on_illutron:
             s = " not"
-        return "{} is{} on Illutron".format(self.member.username, s)
+        return "%s is%s on Illutron" % (self.member.username, s)
     
