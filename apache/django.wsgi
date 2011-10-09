@@ -10,5 +10,4 @@ sys.path.append('/home/illutron/srv/IllutronDashboard/')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'IllutronDashboard.settings'
 
 import django.core.handlers.wsgi
-
 application = django.core.handlers.wsgi.WSGIHandler()
