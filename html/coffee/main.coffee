@@ -1,10 +1,11 @@
 $ ()->
-	jsonUrl = "http://illutron.johan.cc/"
+	jsonUrl = "http://illutron.johan.cc/api/"
 	
 	window.Person = Backbone.Model.extend({
+		initialize: -> alert "asd"
 		defaults: ->
 			{
-			"member": "-"
+			"username": "-"
 			}
 			
 		url: ->
@@ -37,6 +38,9 @@ $ ()->
 		template: _.template($('#person-template').html())
 	
 		initialize: ->
+			this.model.bind('change', this.render, this);
+			this.model.bind('destroy', this.remove, this);
+	      
 			this
 	
 		render: ->
@@ -62,11 +66,12 @@ $ ()->
 		render: -> this
 		
 		addAll: ->
+			alert "asd"
 			People.each(this.addPerson);
 	      
 		
 		addPerson: (person) ->
-			#alert person.url()
+			alert person.url()
 			view = new PersonView(model: person)
 			@$("#people-list").append view.render().el
 

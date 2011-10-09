@@ -1,11 +1,14 @@
 (function() {
   $(function() {
     var jsonUrl;
-    jsonUrl = "http://illutron.johan.cc/";
+    jsonUrl = "http://illutron.johan.cc/api/";
     window.Person = Backbone.Model.extend({
+      initialize: function() {
+        return alert("asd");
+      },
       defaults: function() {
         return {
-          "member": "-"
+          "username": "-"
         };
       },
       url: function() {
@@ -29,6 +32,8 @@
       tagName: "div",
       template: _.template($('#person-template').html()),
       initialize: function() {
+        this.model.bind('change', this.render, this);
+        this.model.bind('destroy', this.remove, this);
         return this;
       },
       render: function() {
@@ -53,10 +58,12 @@
         return this;
       },
       addAll: function() {
+        alert("asd");
         return People.each(this.addPerson);
       },
       addPerson: function(person) {
         var view;
+        alert(person.url());
         view = new PersonView({
           model: person
         });
