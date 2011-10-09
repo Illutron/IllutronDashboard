@@ -1,9 +1,5 @@
-from django.core import serializers
-
 from django.utils import simplejson
-
 from django.http import HttpResponse
-from models import Entry
 from django.contrib.auth.models import User
 
 def latest(request):
@@ -48,4 +44,3 @@ def latest(request):
 
 
     return HttpResponse(simplejson.dumps(data), mimetype='application/json')
-    
