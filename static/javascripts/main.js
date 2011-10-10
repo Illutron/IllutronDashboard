@@ -1,14 +1,19 @@
 (function() {
+  $.ajaxSetup({
+    cache: false
+  });
   $(function() {
     var jsonUrl;
-    jsonUrl = "http://illutron.johan.cc/api/";
+    jsonUrl = "api/";
     window.Person = Backbone.Model.extend({
       initialize: function() {
-        return alert("asd");
+        return this;
       },
       defaults: function() {
         return {
-          "username": "-"
+          "username": "-",
+          "on_illutron": false,
+          "image": ""
         };
       },
       url: function() {
@@ -20,12 +25,7 @@
     });
     window.PeopleList = Backbone.Collection.extend({
       model: Person,
-      url: jsonUrl + "members/",
-      sync: function(method, model, options) {
-        options.timeout = 10000;
-        options.dataType = "jsonp";
-        return Backbone.sync(method, model, options);
-      }
+      url: jsonUrl + "members/list"
     });
     window.People = new PeopleList;
     window.PersonView = Backbone.View.extend({
@@ -51,23 +51,22 @@
           return window.People.each(function(person) {
             return person.fetch();
           });
-        }), 5000);
+        }), 3000);
         return this;
       },
       render: function() {
         return this;
       },
       addAll: function() {
-        alert("asd");
         return People.each(this.addPerson);
       },
       addPerson: function(person) {
         var view;
-        alert(person.url());
         view = new PersonView({
           model: person
         });
-        return this.$("#people-list").append(view.render().el);
+        this.$("#people-list").append(view.render().el);
+        return person.fetch();
       }
     });
     return window.App = new AppView;

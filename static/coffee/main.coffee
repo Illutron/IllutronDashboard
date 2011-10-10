@@ -1,11 +1,16 @@
+$.ajaxSetup({ cache: false });
+
 $ ()->
-	jsonUrl = "http://illutron.johan.cc/api/"
+	jsonUrl = "api/"
 	
 	window.Person = Backbone.Model.extend({
-		initialize: -> alert "asd"
+		initialize: ->
+			this
 		defaults: ->
 			{
 			"username": "-"
+			"on_illutron" : false
+			"image" : ""
 			}
 			
 		url: ->
@@ -17,12 +22,12 @@ $ ()->
 	window.PeopleList = Backbone.Collection.extend({
 		model: Person
 		#url: "http://jive.local:8000/api/latest/"
-		url: jsonUrl+ "members/"
+		url: jsonUrl+ "members/list"
 		
-		sync: (method, model, options) -> 
-			options.timeout = 10000
-			options.dataType = "jsonp"
-			Backbone.sync(method, model, options)
+		# sync: (method, model, options) -> 
+		# 	options.timeout = 10000
+		# 	options.dataType = "jsonp"
+		# 	Backbone.sync(method, model, options)
 		
 		# initialize: ->
 		# 			this.bind("add", this.changed)
@@ -59,22 +64,20 @@ $ ()->
 			People.fetch()
 			
 			
-			setInterval( (-> window.People.each(  (person) -> person.fetch() )) , 5000);
+			setInterval( (-> window.People.each(  (person) -> person.fetch() )) , 3000);
 			
 			this
 
 		render: -> this
 		
 		addAll: ->
-			alert "asd"
 			People.each(this.addPerson);
 	      
 		
 		addPerson: (person) ->
-			alert person.url()
 			view = new PersonView(model: person)
 			@$("#people-list").append view.render().el
-
+			person.fetch()
 	)
 
 	window.App = new AppView;
