@@ -3,4 +3,5 @@
 .idea
 *pyc
 *~
+media
 settings_local.py
