@@ -22,7 +22,7 @@ $ ()->
 	window.PeopleList = Backbone.Collection.extend({
 		model: Person
 		#url: "http://jive.local:8000/api/latest/"
-		url: jsonUrl+ "members/list"
+		url: jsonUrl+ "members"
 		
 		# sync: (method, model, options) -> 
 		# 	options.timeout = 10000

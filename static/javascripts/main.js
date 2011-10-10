@@ -25,7 +25,7 @@
     });
     window.PeopleList = Backbone.Collection.extend({
       model: Person,
-      url: jsonUrl + "members/list"
+      url: jsonUrl + "members"
     });
     window.People = new PeopleList;
     window.PersonView = Backbone.View.extend({
